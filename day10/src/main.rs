@@ -21,7 +21,7 @@ fn main() {
             match op {
                 // add (value, cycles)
                 "0" => (0, 1),
-                _ => (val.parse::<i32>().unwrap(), 2),
+                 _  => (val.parse::<i32>().unwrap(), 2),
             }
         })
         .collect::<Vec<(i32, i32)>>()
