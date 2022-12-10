@@ -21,7 +21,7 @@ fn main() {
             match op {
                 // add (value, cycles)
                 "0" => (0, 1),
-                 _  => (val.parse::<i32>().unwrap(), 2)
+                _ => (val.parse::<i32>().unwrap(), 2),
             }
         })
         .collect::<Vec<(i32, i32)>>()
@@ -30,8 +30,7 @@ fn main() {
             for _ in 0..*cycles {
                 if sprite <= curr_cycle % 40 && curr_cycle % 40 <= sprite + 2 {
                     print!("#");
-                }
-                else {
+                } else {
                     print!(" ");
                 }
 
@@ -49,6 +48,6 @@ fn main() {
             sprite = x - 1;
             acc
         });
-    
+
     println!("Part 1: {}", sig);
 }
