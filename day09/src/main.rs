@@ -1,6 +1,11 @@
 use itertools::Itertools;
 use std::{collections::HashSet, fs::read_to_string};
 
+fn main() {
+    println!("Part 1: {}", tail_pos(2));
+    println!("Part 2: {}", tail_pos(10));
+}
+
 fn tail_pos(size: usize) -> usize {
     let mut rope: Vec<(i32, i32)> = vec![(0, 0); size];
 
@@ -99,9 +104,4 @@ fn tail_pos(size: usize) -> usize {
     moves.insert((0, 0));
 
     moves.len()
-}
-
-fn main() {
-    println!("Part 1: {}", tail_pos(2));
-    println!("Part 2: {}", tail_pos(10));
 }
