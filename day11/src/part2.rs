@@ -45,7 +45,9 @@ pub fn main() {
     let captures    = re.captures_iter(data.as_str());
     let mut monkeys = captures.map(Monkey::from_captures).collect::<Vec<Monkey>>();
 
-    // Find the least common multiple of all tests (divisors) from monkeys
+    // Find the least common multiple of all tests (divisors) from monkeys.
+    // We could have just multiplied all tests (divisors) as they are all coprime
+    // but that's too weak.
     let modulo = monkeys.iter().fold(1, |prod, m|
         if prod % m.test == 0 { prod } else { prod * m.test }
     );
