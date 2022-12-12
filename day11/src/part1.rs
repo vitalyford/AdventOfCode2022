@@ -52,9 +52,7 @@ pub fn main() {
                 let val = m.op.1.parse::<u64>().unwrap_or(*m.items.get(0).unwrap());
                 let level = match m.op.0.as_str() {
                     "*" => (m.items.pop_front().unwrap() * val) / 3,
-                    "+" => (m.items.pop_front().unwrap() + val) / 3,
-                    "/" => (m.items.pop_front().unwrap() / val) / 3,
-                     _  => (m.items.pop_front().unwrap() - val) / 3,
+                     _  => (m.items.pop_front().unwrap() + val) / 3,
                 };
                 m.inspects += 1;
                 let throw_id = if level % m.test == 0 { m.if_true } else { m.if_false };
