@@ -49,19 +49,7 @@ fn calc(
             if calculated.contains_key(&name) {
                 calculated[&name]
             } else {
-                let (first, op, second) = ops[&name].split(" ").fold(
-                    (String::new(), String::new(), String::new()),
-                    |mut tuple, part| {
-                        if tuple.0.is_empty() {
-                            tuple.0 = part.to_string();
-                        } else if tuple.1.is_empty() {
-                            tuple.1 = part.to_string();
-                        } else {
-                            tuple.2 = part.to_string();
-                        }
-                        tuple
-                    },
-                );
+                let (first, op, second) = parse_into_tuple(ops[&name].clone());
                 if !calculated.contains_key(&first) {
                     let val = calc(first.clone(), &ops, &mut calculated, &mut need_hum);
                     calculated.insert(first.clone(), val);
