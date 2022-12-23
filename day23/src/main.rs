@@ -56,37 +56,21 @@ fn main() {
                 let mut proposed_move = None;
                 'dir: for direction in &directions {
                     let (px, py) = match direction {
-                        &"N" => {
+                        &"N" | &"S" => {
                             for i in -1..=1 {
-                                if elves.contains(&Elf { x: elf.x + i, y: elf.y + 1 }) {
+                                if elves.contains(&Elf { x: elf.x + i, y: elf.y + ('Q' as i32 - direction.chars().next().unwrap() as i32).signum() }) {
                                     continue 'dir;
                                 }
                             }
-                            (elf.x, elf.y + 1)
+                            (elf.x, elf.y + ('Q' as i32 - direction.chars().next().unwrap() as i32).signum())
                         },
-                        &"S" => {
+                        &"E" | &"W" => {
                             for i in -1..=1 {
-                                if elves.contains(&Elf { x: elf.x + i, y: elf.y - 1 }) {
+                                if elves.contains(&Elf { x: elf.x + ('Q' as i32 - direction.chars().next().unwrap() as i32).signum(), y: elf.y + i }) {
                                     continue 'dir;
                                 }
                             }
-                            (elf.x, elf.y - 1)
-                        },
-                        &"W" => {
-                            for i in -1..=1 {
-                                if elves.contains(&Elf { x: elf.x - 1, y: elf.y + i }) {
-                                    continue 'dir;
-                                }
-                            }
-                            (elf.x - 1, elf.y)
-                        },
-                        &"E" => {
-                            for i in -1..=1 {
-                                if elves.contains(&Elf { x: elf.x + 1, y: elf.y + i }) {
-                                    continue 'dir;
-                                }
-                            }
-                            (elf.x + 1, elf.y)
+                            (elf.x + ('Q' as i32 - direction.chars().next().unwrap() as i32).signum(), elf.y)
                         },
                         _ => panic!("Invalid direction"),
                     };
