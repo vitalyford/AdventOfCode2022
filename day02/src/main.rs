@@ -17,8 +17,8 @@ fn main() {
             // solve part 1
             match (x[1] - ascii_x) - (x[0] - ascii_a) {
                 -2 | 1 => *part1 += x[1] - ascii_x + 7, // 1 + 6 (won)
-                   0   => *part1 += x[1] - ascii_x + 4,      // 1 + 3 (drew)
-                   _   => *part1 += x[1] - ascii_x + 1,      // 1 + 0 (lost)
+                   0   => *part1 += x[1] - ascii_x + 4, // 1 + 3 (drew)
+                   _   => *part1 += x[1] - ascii_x + 1, // 1 + 0 (lost)
             };
             // solve part 2
             match x[1] - ascii_x {
