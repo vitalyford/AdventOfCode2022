@@ -7,6 +7,28 @@ struct Point {
     val: char,
 }
 
+fn main() {
+    let map = read_to_string("./data.txt")
+        .expect("File does not exist!")
+        .lines()
+        .map(|line| line.trim().chars().collect::<Vec<char>>())
+        .collect::<Vec<Vec<char>>>();
+
+    let mut blizs = HashSet::new();
+    let me = Point { x: 1, y: 0, val: 'E' };
+
+    for (row, v) in map.iter().enumerate() {
+        for (col, c) in v.iter().enumerate() {
+            if c.ne(&'.') && c.ne(&'#') {
+                blizs.insert(Point { x: col as i32, y: row as i32, val: *c });
+            }
+        }
+    }
+
+    println!("Part 1: {}", search(me.clone(), Point { x: map[0].len() as i32 - 2, y: map.len() as i32 - 1, val: 'E'}, &map, &blizs, 1));
+    println!("Part 2: {}", search(me.clone(), Point { x: map[0].len() as i32 - 2, y: map.len() as i32 - 1, val: 'E'}, &map, &blizs, 3));
+}
+
 fn search(init_start: Point, init_end: Point, map: &Vec<Vec<char>>, blizzards: &HashSet<Point>, times: usize) -> i32 {
     let mut steps = 0;
     let ways = vec![(init_start.clone(), init_end.clone()), (init_end.clone(), init_start.clone()), (init_start.clone(), init_end.clone())];
@@ -89,26 +111,4 @@ fn search(init_start: Point, init_end: Point, map: &Vec<Vec<char>>, blizzards: &
         }
     }
     steps
-}
-
-fn main() {
-    let map = read_to_string("./data.txt")
-        .expect("File does not exist!")
-        .lines()
-        .map(|line| line.trim().chars().collect::<Vec<char>>())
-        .collect::<Vec<Vec<char>>>();
-
-    let mut blizs = HashSet::new();
-    let me = Point { x: 1, y: 0, val: 'E' };
-
-    for (row, v) in map.iter().enumerate() {
-        for (col, c) in v.iter().enumerate() {
-            if c.ne(&'.') && c.ne(&'#') {
-                blizs.insert(Point { x: col as i32, y: row as i32, val: *c });
-            }
-        }
-    }
-
-    println!("Part 1: {}", search(me.clone(), Point { x: map[0].len() as i32 - 2, y: map.len() as i32 - 1, val: 'E'}, &map, &blizs, 1));
-    println!("Part 2: {}", search(me.clone(), Point { x: map[0].len() as i32 - 2, y: map.len() as i32 - 1, val: 'E'}, &map, &blizs, 3));
 }
